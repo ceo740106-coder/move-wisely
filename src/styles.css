@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: var(--mw-bg);
+  --color-surface: var(--mw-surface);
+  --color-surface-2: var(--mw-surface-2);
+  --color-fg: var(--mw-fg);
+  --color-muted: var(--mw-muted);
+  --color-subtle: var(--mw-subtle);
+  --color-primary: var(--mw-primary);
+  --color-primary-fg: var(--mw-primary-fg);
+  --color-accent: var(--mw-accent);
+  --color-danger: var(--mw-danger);
+  --color-warn: var(--mw-warn);
+  --color-success: var(--mw-success);
+  --color-border: var(--mw-border);
+  --color-board-light: var(--mw-board-light);
+  --color-board-dark: var(--mw-board-dark);
+  --color-board-highlight: var(--mw-board-highlight);
+  --color-board-check: var(--mw-board-check);
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Outfit", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-xs: 5px;
+  --radius-sm: 9px;
+  --radius-md: 13px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root,
+.theme-light {
+  --mw-bg: #f4f5f2;
+  --mw-surface: #ffffff;
+  --mw-surface-2: #edf0eb;
+  --mw-fg: #1a1d1a;
+  --mw-muted: #6e756c;
+  --mw-subtle: #9ca39a;
+  --mw-primary: #3d7a55;
+  --mw-primary-fg: #ffffff;
+  --mw-accent: #4b8f61;
+  --mw-danger: #c24135;
+  --mw-warn: #a36a12;
+  --mw-success: #2d7a51;
+  --mw-border: #d8ddd7;
+  --mw-board-light: #eeeed2;
+  --mw-board-dark: #769656;
+  --mw-board-highlight: rgba(246, 246, 90, 0.68);
+  --mw-board-check: rgba(239, 85, 69, 0.78);
+}
+
+.theme-dark {
+  --mw-bg: #111311;
+  --mw-surface: #181b18;
+  --mw-surface-2: #212521;
+  --mw-fg: #f4f5ef;
+  --mw-muted: #a1a69e;
+  --mw-subtle: #697068;
+  --mw-primary: #a6d3ad;
+  --mw-primary-fg: #132016;
+  --mw-accent: #75b682;
+  --mw-danger: #ef7367;
+  --mw-warn: #e4b25c;
+  --mw-success: #78c493;
+  --mw-border: #303630;
+  --mw-board-light: #eeeed2;
+  --mw-board-dark: #769656;
+  --mw-board-highlight: rgba(214, 194, 76, 0.72);
+  --mw-board-check: rgba(210, 65, 56, 0.82);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  min-width: 320px;
+  background: var(--mw-bg);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+html.theme-dark { color-scheme: dark; }
+
+body,
+#app {
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--mw-bg);
+  color: var(--mw-fg);
+  font-family: var(--font-sans);
+  letter-spacing: -0.012em;
+}
+
+body { overflow-x: hidden; }
+
+button,
+input,
+textarea,
+select { font: inherit; }
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
+
+h1,
+h2,
+h3,
+h4,
+h5 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+p { text-wrap: pretty; }
+
+a { color: inherit; }
+
+::selection { background: color-mix(in srgb, var(--mw-primary) 30%, transparent); }
+
+.mw-glass {
+  background: color-mix(in srgb, var(--mw-surface) 88%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.mw-focus:focus-visible {
+  outline: 2px solid var(--mw-primary);
+  outline-offset: 3px;
+}
+
+.mw-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+.mw-scroll::-webkit-scrollbar-thumb { background: var(--mw-border); border-radius: 999px; }
+
+.board-shell { touch-action: manipulation; user-select: none; }
+.board-square { position: relative; aspect-ratio: 1; }
+.board-piece { filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.18)); transition: transform 90ms var(--ease-out); }
+.board-square:hover .board-piece { transform: translateY(-1px); }
+
+@media print {
+  header,
+  nav,
+  .no-print { display: none !important; }
+  body,
+  #app { background: #fff !important; color: #111 !important; }
+  .print-break { break-before: page; }
+  .border { border-color: #ddd !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
